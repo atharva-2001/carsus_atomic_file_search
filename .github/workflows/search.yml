@@ -1,0 +1,17 @@
+name: carsus-atomic-file-search
+
+on:
+  schedule:
+    # Run every hour
+    - cron: 0 * * * *
+
+jobs:
+  setup-environment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          repository: tardis-sn/carsus
+          # ref: # TODO
+        
+          
