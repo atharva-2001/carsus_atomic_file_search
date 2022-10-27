@@ -1,9 +1,17 @@
 name: carsus-atomic-file-search
 
-on:
-  schedule:
-    # Run every hour
-    - cron: 0 * * * *
+# on:
+#   push:
+#   schedule:
+#     # Run every hour
+#     - cron: 0 * * * *
+
+on: 
+  workflow_dispatch:
+    inputs:
+      git-ref:
+        description: Git Ref (Optional)    
+        required: false
 
 jobs:
   setup-environment:
@@ -13,5 +21,9 @@ jobs:
         with:
           repository: tardis-sn/carsus
           # ref: # TODO
+          path: carsus_latest/
+          
+        
+      
         
           
