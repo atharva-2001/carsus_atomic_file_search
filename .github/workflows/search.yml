@@ -6,8 +6,18 @@ name: carsus-atomic-file-search
 #     # Run every hour
 #     - cron: 0 * * * *
 
-on: 
-  workflow_dispatch
+# on: 
+#   workflow_dispatch
+
+on:
+  push:
+    branches:
+    - '*'
+
+  pull_request:
+    branches:
+    - '*'
+
 
 
 jobs:
@@ -15,10 +25,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        # with:
+        #   repository: tardis-sn/carsus
+        #   # ref: # TODO
+        #   path: carsus_latest/
+
+      - name: create file
+        run: touch test_file
+
+      # - name: SCP
+      #   run: scp scp test_file ghci@moria.egr.msu.edu:/storage/github_dropoffs/tardis/ 
+      - name: copy file via ssh password
+        uses: appleboy/scp-action@master
         with:
-          repository: tardis-sn/carsus
-          # ref: # TODO
-          path: carsus_latest/
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          source: "test_file"
+          target: "/storage/github_dropoffs/tardis/"
+
           
         
       
