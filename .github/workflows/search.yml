@@ -41,7 +41,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          source: "test_file"
+          source: "*_*"
           target: "/storage/github_dropoffs/tardis/"
 
           
