@@ -40,9 +40,9 @@ jobs:
       - name: copy file via ssh password
         uses: appleboy/scp-action@master
         with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
+          host: ${{ secrets.GH_DROPOFF_HOST }}
+          username: ${{ secrets.GH_DROPOFF_PASSWORD }}
+          password: ${{ secrets.GH_DROPOFF_USERNAME }}
           source: '*_*'
           target: "/storage/github_dropoffs/tardis/"
 
