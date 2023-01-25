@@ -32,6 +32,8 @@ jobs:
 
       - name: create file
         run: touch test_file
+      - name: try printing hostname
+        run: echo ${{ secrets.USERNAME }}
 
       # - name: SCP
       #   run: scp scp test_file ghci@moria.egr.msu.edu:/storage/github_dropoffs/tardis/ 
