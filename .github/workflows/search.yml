@@ -41,8 +41,8 @@ jobs:
         uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.GH_DROPOFF_HOST }}
-          username: ${{ secrets.GH_DROPOFF_PASSWORD }}
-          password: ${{ secrets.GH_DROPOFF_USERNAME }}
+          username: ${{ secrets.GH_DROPOFF_USERNAME }}
+          password: ${{ secrets.GH_DROPOFF_PASSWORD }}
           source: '*_*'
           target: "/storage/github_dropoffs/tardis/"
 
