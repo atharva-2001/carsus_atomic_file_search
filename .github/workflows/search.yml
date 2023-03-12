@@ -39,9 +39,16 @@ jobs:
 
       - name: cat certificate
         run: cat certificate.crt
-      
-      
 
+      - name: Update certificates
+        run: |
+          python -c """
+          import certifi
+          with open(certifi.where(), 'a') as f1, open('certificate.crt', 'r') as  f2:
+            f1.write(f2.read())
+            print(f1.read())
+          """
+          
       - name: create file
         run: touch test_file
       - name: try printing hostname
