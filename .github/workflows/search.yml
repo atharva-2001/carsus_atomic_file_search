@@ -34,8 +34,21 @@ jobs:
         with:
           python-version: '3.8' 
 
+      # - name: get new certificate
+      #   run: echo | openssl s_client -connect physics.nist.gov:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > certificate.crt
+
+      - name: get new certificates
+        run: wget https://curl.haxx.se/ca/cacert.pem
+      
       - name: get new certificate
-        run: echo | openssl s_client -connect physics.nist.gov:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > certificate.crt
+        run: echo quit | openssl s_client -showcerts -servername "physics.nist.gov" -connect physics.nist.gov:443 > cacert.pem
+      
+      - name: rename certificates and move them
+        run: mv cacert.pem cabundle.crt && sudo mv cabundle.crt $HOME/cabundle.crt  
+      
+      - name: change global certificate
+        run: pip config set global.cert $HOME/certs/ca-bundle.crt
+      
 
       - name: cat certificate
         run: cat certificate.crt
