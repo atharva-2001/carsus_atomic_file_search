@@ -40,6 +40,9 @@ jobs:
       - name: cat certificate
         run: cat certificate.crt
 
+      - name: get certifi
+        run: pip install certifi
+
       - name: Update certificates
         run: |
           python -c """
@@ -48,7 +51,7 @@ jobs:
             f1.write(f2.read())
             print(f1.read())
           """
-          
+
       - name: create file
         run: touch test_file
       - name: try printing hostname
