@@ -28,6 +28,15 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Get up to date CA Bundle
+        run: wget https://curl.haxx.se/ca/cacert.pem
+
+      - name: Get new NIST certificate
+        run: echo quit | openssl s_client -showcerts -servername "physics.nist.gov" -connect physics.nist.gov:443 > cacert.pem
+
+      - name: Rename certificates and move them
+        run: mv cacert.pem cabundle.crt && sudo mv cabundle.crt $HOME/cabundle.crt  
+
       - name: Get carsus env file
         run: wget https://raw.githubusercontent.com/tardis-sn/carsus/master/carsus_env3.yml 
 
@@ -39,5 +48,8 @@ jobs:
             environment-file: carsus_env3.yml
             activate-environment: carsus
             use-mamba: true
+            
+      - name: Change global certificate
+        run: pip config set global.cert $HOME/ca-bundle.crt
 
     
