@@ -37,8 +37,8 @@ jobs:
       # - name: Rename certificates and move them
       #   run: mv cacert.pem cabundle.crt && sudo mv cabundle.crt $HOME/cabundle.crt  
 
-      # - name: Get carsus env file
-      #   run: wget https://raw.githubusercontent.com/tardis-sn/carsus/master/carsus_env3.yml 
+      - name: Get carsus env file
+        run: wget https://raw.githubusercontent.com/tardis-sn/carsus/master/carsus_env3.yml 
 
       - name: Setup environment
         uses: conda-incubator/setup-miniconda@v2
