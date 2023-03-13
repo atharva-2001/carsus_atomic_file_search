@@ -9,6 +9,10 @@ on:
     branches:
     - '*'
 
+env:
+  XUVTOP: /tmp/chianti
+  REQUESTS_CA_BUNDLE: $HOME/ca-bundle.crt
+
 jobs:
   build:
     strategy:
