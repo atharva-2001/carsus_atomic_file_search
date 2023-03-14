@@ -39,6 +39,10 @@ jobs:
 
       - name: Get carsus env file
         run: wget https://raw.githubusercontent.com/tardis-sn/carsus/master/carsus_env3.yml 
+      
+      - name: Get gfall file
+        run: python -c "import requests; requests.get('https://raw.githubusercontent.com//tardis-sn/carsus/master/carsus/tests/data/gftest.all  ')"
+
 
       - name: Setup environment
         uses: conda-incubator/setup-miniconda@v2
