@@ -14,7 +14,12 @@ on:
 #   REQUESTS_CA_BUNDLE: $HOME/ca-bundle.crt
 
 jobs:
+  create_artifacts:
+    uses: ./.github/workflows/search.yml
+
   build:
+    needs: create_artifacts
+    if: carsus-atomic-file-search.setup-environment.steps['python'].outputs.triggered == 'true'
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest]
@@ -37,24 +42,23 @@ jobs:
       # - name: Rename certificates and move them
       #   run: mv cacert.pem cabundle.crt && sudo mv cabundle.crt $HOME/cabundle.crt  
 
-      - name: Get carsus env file
-        run: wget https://raw.githubusercontent.com/tardis-sn/carsus/master/carsus_env3.yml 
+      # - name: Get carsus env file
+      #   run: wget https://raw.githubusercontent.com/tardis-sn/carsus/master/carsus_env3.yml 
       
-      - name: requests
-        run: pip install requests
-        
-      - name: Get gfall file
-        run: python -c "import requests; requests.get('https://raw.githubusercontent.com//tardis-sn/carsus/master/carsus/tests/data/gftest.all  ')"
+      # - name: requests
+      #   run: pip install requests
 
+      # - name: Get gfall file
+      #   run: python -c "import requests; requests.get('https://raw.githubusercontent.com//tardis-sn/carsus/master/carsus/tests/data/gftest.all  ')"
 
-      - name: Setup environment
-        uses: conda-incubator/setup-miniconda@v2
-        with:
-            miniforge-variant: Mambaforge
-            miniforge-version: latest
-            environment-file: carsus_env3.yml
-            activate-environment: carsus
-            use-mamba: true
+      # - name: Setup environment
+      #   uses: conda-incubator/setup-miniconda@v2
+      #   with:
+      #       miniforge-variant: Mambaforge
+      #       miniforge-version: latest
+      #       environment-file: carsus_env3.yml
+      #       activate-environment: carsus
+      #       use-mamba: true
 
       # - name: Change global certificate
       #   run: pip config set global.cert $HOME/ca-bundle.crt
