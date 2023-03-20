@@ -18,8 +18,8 @@ jobs:
     uses: ./.github/workflows/search.yml
 
   build:
-    needs: create_artifacts
-    if: carsus-atomic-file-search.setup-environment.steps['python'].outputs.triggered == 'true'
+    # needs: create_artifacts
+    # if: carsus-atomic-file-search.setup-environment.steps['python'].outputs.triggered == 'true'
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest]
@@ -45,8 +45,11 @@ jobs:
       # - name: Get carsus env file
       #   run: wget https://raw.githubusercontent.com/tardis-sn/carsus/master/carsus_env3.yml 
       
-      # - name: requests
-      #   run: pip install requests
+      - name: requests
+        run: pip install requests
+      
+      - name: nist check
+        run: python nist_check.py
 
       # - name: Get gfall file
       #   run: python -c "import requests; requests.get('https://raw.githubusercontent.com//tardis-sn/carsus/master/carsus/tests/data/gftest.all  ')"
