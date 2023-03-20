@@ -11,7 +11,7 @@ on:
 
 jobs:
   nist-check:
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
 
