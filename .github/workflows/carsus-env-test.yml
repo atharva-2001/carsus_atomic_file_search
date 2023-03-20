@@ -9,61 +9,24 @@ on:
     branches:
     - '*'
 
-# env:
-#   XUVTOP: /tmp/chianti
-#   REQUESTS_CA_BUNDLE: $HOME/ca-bundle.crt
-
 jobs:
-  create_artifacts:
-    uses: ./.github/workflows/search.yml
-
-  build:
-    # needs: create_artifacts
-    # if: carsus-atomic-file-search.setup-environment.steps['python'].outputs.triggered == 'true'
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest]
-    defaults:
-      run:
-        shell: bash -l {0}
-
+  nist-check:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
+
+      - uses: actions/setup-python@v4
+        name: python
         with:
-          fetch-depth: 0
+          python-version: '3.8' 
 
-      # - name: Get up to date CA Bundle
-      #   run: wget https://curl.haxx.se/ca/cacert.pem
-
-      # - name: Get new NIST certificate
-      #   run: echo quit | openssl s_client -showcerts -servername "physics.nist.gov" -connect physics.nist.gov:443 > cacert.pem
-
-      # - name: Rename certificates and move them
-      #   run: mv cacert.pem cabundle.crt && sudo mv cabundle.crt $HOME/cabundle.crt  
-
-      # - name: Get carsus env file
-      #   run: wget https://raw.githubusercontent.com/tardis-sn/carsus/master/carsus_env3.yml 
-      
-      - name: requests
+      - name: install requests
         run: pip install requests
       
-      - name: nist check
-        run: python nist_check.py
-
-      # - name: Get gfall file
-      #   run: python -c "import requests; requests.get('https://raw.githubusercontent.com//tardis-sn/carsus/master/carsus/tests/data/gftest.all  ')"
-
-      # - name: Setup environment
-      #   uses: conda-incubator/setup-miniconda@v2
-      #   with:
-      #       miniforge-variant: Mambaforge
-      #       miniforge-version: latest
-      #       environment-file: carsus_env3.yml
-      #       activate-environment: carsus
-      #       use-mamba: true
-
-      # - name: Change global certificate
-      #   run: pip config set global.cert $HOME/ca-bundle.crt
-
-    
+      - name: Download Nist Data
+        run: |
+          python -c """
+          import requests
+          WEIGHTSCOMP_URL = "http://physics.nist.gov/cgi-bin/Compositions/stand_alone.pl"
+          res = requests.get(WEIGHTSCOMP_URL, params={'ascii': 'ascii2', 'isotype': 'some'})
+          """
