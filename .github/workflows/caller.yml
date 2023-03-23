@@ -17,10 +17,13 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     # if: a-b-c-d.steps["setup python"].outputs.triggered == 'true'
-    if: needs.build.outputs.out1 == 'true'
+    # if: needs.build.outputs.out1 == 'true'
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v4
-        name: setup python 3.9
-        with:
-          python-version: '3.9' 
+      - env:
+          OUTPUT1: ${{needs.build.outputs.out1}}
+        run: echo "$OUTPUT1"
+      # - uses: actions/checkout@v2
+      # - uses: actions/setup-python@v4
+      #   name: setup python 3.9
+      #   with:
+      #     python-version: '3.9' 
