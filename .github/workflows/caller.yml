@@ -16,7 +16,8 @@ jobs:
   post-build:
     needs: build
     runs-on: ubuntu-latest
-    if: a-b-c-d.steps["setup python"].outputs.triggered == 'true'
+    # if: a-b-c-d.steps["setup python"].outputs.triggered == 'true'
+    if: needs.build.outputs.out1 == 'true'
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v4
