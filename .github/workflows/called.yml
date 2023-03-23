@@ -11,7 +11,7 @@ on:
   workflow_call:
     outputs:
       outA:
-        value: ${{ jobs.build.steps["setup python"].outputs.triggered }}
+        value: ${{ jobs.build.steps.step1.outputs.triggered }}
 
 jobs:
   build:
@@ -22,5 +22,6 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v4
         name: setup python
+        id: step1
         with:
           python-version: '3.8' 
