@@ -13,17 +13,17 @@ on:
 jobs:
   build:
     uses: ./.github/workflows/called.yml
-  pre-build:
-    runs-on: ubuntu-latest
-    steps:
-      - env:
-          OUTPUT1: ${{needs.build.outputs.outA.value}}
-        run: echo "$OUTPUT1"
+  # pre-build:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - env:
+  #         OUTPUT1: ${{needs.build.outputs.outA}}
+  #       run: echo "$OUTPUT1"
   post-build:
     needs: build
     runs-on: ubuntu-latest
     # if: a-b-c-d.steps["setup python"].outputs.triggered == 'true'
-    if: needs.build.outputs.outA == 'true'
+    if: ${{needs.build.outputs.outA}} == 'true'
     steps:
       - env:
           OUTPUT1: ${{needs.build.outputs.outA}}

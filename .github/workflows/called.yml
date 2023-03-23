@@ -11,13 +11,13 @@ on:
   workflow_call:
     outputs:
       outA:
-        value: ${{ jobs.build.steps.step1.triggered }}
+        value: ${{ jobs.build.outputs.out1 }}
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    # outputs:
-    #   out1: steps["setup python"].outputs.triggered
+    outputs:
+      out1: ${{ steps.step1.outputs.triggered }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v4
@@ -26,4 +26,4 @@ jobs:
         with:
           python-version: '3.8' 
       # - id: step2
-      #   run: echo "::set-output name=step2out::true"
+      #   run: echo "::set-output name=outA::true"
