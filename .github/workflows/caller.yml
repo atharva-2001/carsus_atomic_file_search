@@ -17,7 +17,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     # if: a-b-c-d.steps["setup python"].outputs.triggered == 'true'
-    # if: needs.build.outputs.out1 == 'true'
+    if: needs.build.outputs.outA == 'true'
     steps:
       - env:
           OUTPUT1: ${{needs.build.outputs.outA}}
