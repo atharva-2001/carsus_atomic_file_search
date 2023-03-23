@@ -9,6 +9,9 @@ on:
     branches:
     - '*'
   workflow_call:
+    outputs:
+      outA:
+        value: ${{ jobs.build.outputs.out1 }}
 
 jobs:
   build:

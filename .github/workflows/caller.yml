@@ -20,7 +20,7 @@ jobs:
     # if: needs.build.outputs.out1 == 'true'
     steps:
       - env:
-          OUTPUT1: ${{needs.build.steps}}
+          OUTPUT1: ${{needs.build.outputs.outA}}
         run: echo "$OUTPUT1"
       # - uses: actions/checkout@v2
       # - uses: actions/setup-python@v4
