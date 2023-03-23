@@ -1,0 +1,21 @@
+name: a-b-c-d
+
+on:
+  push:
+    branches:
+    - '*'
+
+  pull_request:
+    branches:
+    - '*'
+  workflow_call:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v4
+        name: setup python
+        with:
+          python-version: '3.8' 
