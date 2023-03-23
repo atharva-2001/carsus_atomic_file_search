@@ -11,7 +11,7 @@ on:
   workflow_call:
     outputs:
       outA:
-        value: ${{ jobs.build.steps.step1.outputs.triggered }}
+        value: ${{ jobs.build.steps.step1.triggered }}
 
 jobs:
   build:
@@ -25,3 +25,5 @@ jobs:
         id: step1
         with:
           python-version: '3.8' 
+      # - id: step2
+      #   run: echo "::set-output name=step2out::true"

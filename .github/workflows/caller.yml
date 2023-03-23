@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - env:
-          OUTPUT1: ${{needs.build.outputs.outA}}
+          OUTPUT1: ${{needs.build.outputs.outA.value}}
         run: echo "$OUTPUT1"
   post-build:
     needs: build
