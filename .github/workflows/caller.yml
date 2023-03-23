@@ -28,8 +28,8 @@ jobs:
       - env:
           OUTPUT1: ${{needs.build.outputs.outA}}
         run: echo "$OUTPUT1"
-      # - uses: actions/checkout@v2
-      # - uses: actions/setup-python@v4
-      #   name: setup python 3.9
-      #   with:
-      #     python-version: '3.9' 
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v4
+        name: setup python 3.9
+        with:
+          python-version: '3.9' 
