@@ -23,10 +23,10 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     # if: a-b-c-d.steps["setup python"].outputs.triggered == 'true'
-    if: ${{needs.build.outputs.outA}} == 'true'
+    if: ${{needs.build.outputs.out-A}} == 'true'
     steps:
       - env:
-          OUTPUT1: ${{needs.build.outputs.outA}}
+          OUTPUT1: ${{needs.build.outputs.out-A}}
         run: echo "$OUTPUT1"
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v4

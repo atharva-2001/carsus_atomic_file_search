@@ -10,19 +10,19 @@ on:
     - '*'
   workflow_call:
     outputs:
-      outA:
-        value: ${{ jobs.build.outputs.out1 }}
+      out-A:
+        value: ${{ jobs.build.outputs.out-1 }}
 
 jobs:
   build:
     runs-on: ubuntu-latest
     outputs:
-      out1: ${{ steps.step1.outputs.triggered }}
+      out-1: ${{ steps.step-1.outputs.triggered }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v4
         name: setup python
-        id: step1
+        id: step-1
         with:
           python-version: '3.8' 
       # - id: step2
