@@ -13,6 +13,12 @@ on:
 jobs:
   build:
     uses: ./.github/workflows/called.yml
+  pre-build:
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          OUTPUT1: ${{needs.build.outputs.outA}}
+        run: echo "$OUTPUT1"
   post-build:
     needs: build
     runs-on: ubuntu-latest
