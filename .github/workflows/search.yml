@@ -71,21 +71,21 @@ jobs:
       #       print(f1.read())
       #     """
 
-      # - name: create file
-      #   run: touch test_file
-      # - name: try printing hostname
-      #   run: echo ${{ secrets.GH_DROPOFF_USERNAME }}
+      - name: create file
+        run: touch test_file
+      - name: try printing hostname
+        run: echo ${{ secrets.GH_DROPOFF_USERNAME }}
 
-      # # - name: SCP
-      # #   run: scp scp test_file ghci@moria.egr.msu.edu:/storage/github_dropoffs/tardis/ 
-      # - name: copy file via ssh password
-      #   uses: appleboy/scp-action@master
-      #   with:
-      #     host: ${{ secrets.GH_DROPOFF_HOST }}
-      #     username: ${{ secrets.GH_DROPOFF_USERNAME }}
-      #     password: ${{ secrets.GH_DROPOFF_PASSWORD }}
-      #     source: '*_*'
-      #     target: "/storage/github_dropoffs/tardis/"
+      # - name: SCP
+      #   run: scp scp test_file ghci@moria.egr.msu.edu:/storage/github_dropoffs/tardis/ 
+      - name: copy file via ssh password
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.GH_DROPOFF_HOST }}
+          username: ${{ secrets.GH_DROPOFF_USERNAME }}
+          password: ${{ secrets.GH_DROPOFF_PASSWORD }}
+          source: '*_*'
+          target: "/storage/github_dropoffs/tardis/"
 
           
         
