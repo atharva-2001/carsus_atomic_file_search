@@ -83,7 +83,8 @@ jobs:
         with:
           host: ${{ secrets.GH_DROPOFF_HOST }}
           username: ${{ secrets.GH_DROPOFF_USERNAME }}
-          password: ${{ secrets.GH_DROPOFF_PASSWORD }}
+          key: ${{ secrets.KEY }}
+          # password: ${{ secrets.GH_DROPOFF_PASSWORD }}
           source: '*_*'
           target: "/storage/github_dropoffs/tardis/"
 
